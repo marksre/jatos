@@ -7,4 +7,4 @@
 5. Activate the virtual environment with `source .venv/bin/activate`
 6. Install dependencies with `pip install -r requirements.txt`
 
-Once requirements for virtual envirnoment are installed, you should be able to run the jatosresults.py code to process and summarize all Jatos output files.
+Once requirements for virtual envirnoment are installed, you should be able to run the jatosresults.py code (`python jatosresults.py`) to process and summarize all Jatos output files.
