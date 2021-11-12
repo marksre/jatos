@@ -31,7 +31,7 @@ def combine_jatos():
     """
     A function to concatenate jatos output 'df' objects
     """
-    filenames = glob.glob(f'{input_path}/**/*.txt')
+    filenames = glob.glob(f'{input_path}/jatos_results*')
 
     dfs = []
     for filename in filenames:
@@ -76,13 +76,13 @@ def fix_rt(df):
 ## mean acc and rt for each subject/task combo
 ## subID = rows, mean_acc and mean_rt = columns
 def transform(df):
-    df = df.rename(columns={"correct": "acc", "subID": "record_id"})
+    df = df.rename(columns={"correct": "acc", "subID": "record_id", "jatosID": "jatos_worker_id"})
     df['task'] = df.task.apply(convert_task)
     df = df.sort_values(by=['task', 'record_id'])
     experimentaltrial = df['trial_type'] == 'experiment'
     df = df[experimentaltrial]
     print(df)
-    df = df.groupby(['task','Cond','record_id']).mean()
+    df = df.groupby(['task','Cond','record_id','jatos_worker_id']).mean()
     df.reset_index(inplace=True)
     return df    
 
@@ -98,6 +98,6 @@ df = combine_jatos()
 df = fix_rt(df)
 df = transform(df)
 df = pivot(df)
-df.to_csv(f'{output_path}/Jatos-to-RedCap.csv')
+#df.to_csv(f'{output_path}/Jatos-to-RedCap.csv')
 
 print(df)
