@@ -88,7 +88,7 @@ def transform(df):
 
 def pivot(df):
     print(df)
-    df = df.pivot(index='record_id', columns=['task','Cond'], values=['acc', 'rt'])
+    df = df.pivot(index=['record_id', 'jatos_worker_id'], columns=['task','Cond'], values=['acc', 'rt'])
     df.columns = ['_'.join(rotate(c, 1)) for c in df.columns]
     df = df.reindex(sorted(df.columns), axis=1)
     return df
