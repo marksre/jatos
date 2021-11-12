@@ -93,11 +93,16 @@ def pivot(df):
     df = df.reindex(sorted(df.columns), axis=1)
     return df
 
+def addcolumns(df):
+    print(df)
+    df.insert(0, 'worker_id','jatos_worker_id')
+    return df
 
 df = combine_jatos()
 df = fix_rt(df)
 df = transform(df)
 df = pivot(df)
+df = addcolumns(df)
 #df.to_csv(f'{output_path}/Jatos-to-RedCap.csv')
 
 print(df)
